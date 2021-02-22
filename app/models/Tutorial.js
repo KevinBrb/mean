@@ -39,6 +39,13 @@ class Tutorial {
         return tutorialRemoveResult.deletedCount;
     }
 
+    static async findByTitle(title) {
+        console.log(title);
+        const tutorials = await (await collection).find({ "title": title });
+        console.log(tutorials);
+        return tutorials.map(tutorial => new Tutorial(tutorial));;
+    }
+
     static async deleteAll() {
         const deletedAllResult = await (await collection).deleteMany({});
 

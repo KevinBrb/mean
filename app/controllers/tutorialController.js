@@ -7,7 +7,7 @@ const tutorialController = {
     },
 
     oneTutorial: async (req, res) => {
-        const id = req.params.id;
+        const id = parseInt(req.params.id);
 
         const tutorial = await Tutorial.findOne(id);
         res.json(tutorial);
@@ -74,6 +74,13 @@ const tutorialController = {
         } else if(deletedTutorials > 0) {
             res.status(200).json(`${deletedTutorials} removed`);
         } 
+    },
+
+    tutorialWithTitle: async (req, res) => {
+        console.log(req)
+        const tutorial = await Tutorial.findByTitle(req.query.title);
+
+        res.json(tutorial);
     }
 }
 
